@@ -1,15 +1,14 @@
 "use client";
 
-import React from "react";
-
 type Props = {
   value: number;
   active: boolean;
-  onClick: () => void;
   label: string;
+  onIncrement: () => void;
+  onDecrement: () => void;
 };
 
-export function CounterCard({ value, active, onClick, label }: Props) {
+export function CounterCard({ value, active, label, onIncrement, onDecrement }: Props) {
   return (
     <div className={`flex flex-col items-center gap-4 blink-3s`}>
       <span
@@ -20,23 +19,62 @@ export function CounterCard({ value, active, onClick, label }: Props) {
         {label}
       </span>
 
-      <div
-        role="button"
-        aria-pressed={active}
-        onClick={onClick}
-        className={`flex items-center justify-center rounded-3xl border-4 font-black transition-colors 
-        h-[32vh] w-[90vw] text-[26vw]
-        sm:h-[36vh] sm:w-[82vw] sm:text-[22vw]
-        md:h-[60vh] md:w-[44vw] md:text-[16vw]
-        xl:h-[66vh] xl:w-[40vw] xl:text-[12vw]
-        2xl:h-[68vh] 2xl:w-[36vw] 2xl:text-[11vw]
-        ${
-          active
-            ? "border-emerald-600 bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-200"
-            : "border-zinc-800 bg-zinc-800 text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
-        }`}
-      >
-        {value}
+      <div className="relative">
+        <div
+          aria-pressed={active}
+          className={`flex items-center justify-center rounded-3xl border-4 font-black transition-colors 
+          h-[32vh] w-[90vw] text-[26vw]
+          sm:h-[36vh] sm:w-[82vw] sm:text-[22vw]
+          md:h-[60vh] md:w-[44vw] md:text-[16vw]
+          xl:h-[66vh] xl:w-[40vw] xl:text-[12vw]
+          2xl:h-[68vh] 2xl:w-[36vw] 2xl:text-[11vw]
+          ${
+            active
+              ? "border-emerald-600 bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-200"
+              : "border-zinc-800 bg-zinc-800 text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+          }`}
+        >
+          {value}
+        </div>
+
+        <div className="absolute right-4 bottom-4 flex flex-row items-center justify-center gap-2">
+          <button
+            type="button"
+            aria-label="Incrementar"
+            onClick={onIncrement}
+            className={`flex items-center justify-center rounded-none border font-black transition-colors 
+            h-[4vh] w-[4vh] text-[2.6vh]
+            sm:h-[5vh] sm:w-[5vh] sm:text-[2.8vh]
+            md:h-[6vh] md:w-[6vh] md:text-[3vh]
+            xl:h-[7vh] xl:w-[7vh] xl:text-[3.2vh]
+            2xl:h-[8vh] 2xl:w-[8vh] 2xl:text-[3.4vh]
+            ${
+              active
+                ? "border-emerald-600 bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-200"
+                : "border-zinc-800 bg-zinc-800 text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+            } ${!onIncrement ? "opacity-50 cursor-not-allowed" : "opacity-80 hover:opacity-100 shadow-sm"}`}
+          >
+            +
+          </button>
+          <button
+            type="button"
+            aria-label="Decrementar"
+            onClick={onDecrement}
+            className={`flex items-center justify-center rounded-none border font-black transition-colors 
+            h-[4vh] w-[4vh] text-[2.6vh]
+            sm:h-[5vh] sm:w-[5vh] sm:text-[2.8vh]
+            md:h-[6vh] md:w-[6vh] md:text-[3vh]
+            xl:h-[7vh] xl:w-[7vh] xl:text-[3.2vh]
+            2xl:h-[8vh] 2xl:w-[8vh] 2xl:text-[3.4vh]
+            ${
+              active
+                ? "border-emerald-600 bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-200"
+                : "border-zinc-800 bg-zinc-800 text-white dark:border-zinc-700 dark:bg-zinc-900 dark:text-white"
+            } ${!onDecrement ? "opacity-50 cursor-not-allowed" : "opacity-80 hover:opacity-100 shadow-sm"}`}
+          >
+            -
+          </button>
+        </div>
       </div>
     </div>
   );
