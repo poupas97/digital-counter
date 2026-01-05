@@ -9,10 +9,9 @@ type Props = {
   onDecrement: () => void;
 };
 
-const audio = new Audio("/leon-roar.mp3");
-
 export function CounterCard({ value, active, label, onIncrement, onDecrement }: Props) {
   useEffect(() => {
+    const audio = new Audio("/leon-roar.mp3");
     audio.play();
   }, []);
 
