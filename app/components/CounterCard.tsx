@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 
 type Props = {
   value: number;
@@ -8,7 +9,13 @@ type Props = {
   onDecrement: () => void;
 };
 
+const audio = new Audio("/leon-roar.mp3");
+
 export function CounterCard({ value, active, label, onIncrement, onDecrement }: Props) {
+  useEffect(() => {
+    audio.play();
+  }, []);
+
   return (
     <div className={`flex flex-col items-center gap-4 blink-3s`}>
       <span
@@ -39,8 +46,6 @@ export function CounterCard({ value, active, label, onIncrement, onDecrement }: 
 
         <div className="absolute right-4 bottom-4 flex flex-row items-center justify-center gap-2">
           <button
-            type="button"
-            aria-label="Incrementar"
             onClick={onIncrement}
             className={`flex items-center justify-center rounded-none border font-black transition-colors 
             h-[4vh] w-[4vh] text-[2.6vh]
@@ -57,8 +62,6 @@ export function CounterCard({ value, active, label, onIncrement, onDecrement }: 
             +
           </button>
           <button
-            type="button"
-            aria-label="Decrementar"
             onClick={onDecrement}
             className={`flex items-center justify-center rounded-none border font-black transition-colors 
             h-[4vh] w-[4vh] text-[2.6vh]
